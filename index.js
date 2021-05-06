@@ -6,6 +6,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/userRoute");
 const wisataRoute = require("./routes/wisataRoute");
+const { Authenticated } = require("./middlewares/authenticated");
 dotenv.config();
 
 mongoose.connect(
@@ -34,7 +35,7 @@ app.use(express.json());
 
 //middleware
 app.use("/api/user", userRoute);
-app.use("/api", wisataRoute);
+app.use("/api", Authenticated, wisataRoute);
 
 app.get("/", (req, res) => {
   return res.send("Server connected");
