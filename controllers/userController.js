@@ -14,11 +14,11 @@ const handleLogin = async (req, res) => {
   const email = await Users.findOne({
     email: req.body.email,
   });
-  if (!email) return res.status(404).send("Email Salah!");
+  if (!email) return res.status(400).send("Email Salah!");
 
   //Checking Password valid
   const passwd = await bcrypt.compare(req.body.password, email.password);
-  if (!passwd) return res.status(404).send("Password Salah!");
+  if (!passwd) return res.status(400).send("Password Salah!");
 
   //If Email and Pass Valid
   res.send(email._id);
