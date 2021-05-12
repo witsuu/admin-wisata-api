@@ -75,7 +75,7 @@ const createToken = async (req, res) => {
 
     return res.send(accessToken);
   } else {
-    res.status(404).send("Cant create new token, user not found");
+    res.status(400).send("Cant create new token, user not found");
   }
 };
 
