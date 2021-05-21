@@ -5,7 +5,8 @@ const maxSize = 1024 * 1024;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __basedir + "/static/uploads");
+    const url = req.protocol + "://" + req.get("host");
+    cb(null, url + "/static/uploads");
   },
   filename: (req, file, cb) => {
     cb(null, date.getTime() + "_" + file.originalname);
