@@ -1,6 +1,7 @@
 const multer = require("multer");
 const util = require("util");
 const date = new Date();
+const maxSize = 1024 * 1024;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -11,7 +12,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const uploadImg = multer({ storage: storage }).single("image");
+const uploadImg = multer({
+  storage: storage,
+  limits: { fileSize: maxSize },
+}).single("image");
 const uploadImgMiddleware = util.promisify(uploadImg);
 
 module.exports = {
