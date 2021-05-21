@@ -9,6 +9,8 @@ const wisataRoute = require("./routes/wisataRoute");
 const { Authenticated } = require("./middlewares/authenticated");
 dotenv.config();
 
+global.__basedir = __dirname;
+
 mongoose.connect(
   process.env.DB_HOST,
   {
@@ -26,11 +28,7 @@ mongoose.connect(
 );
 
 app.use(cors());
-app.use(
-  express.urlencoded({
-    extended: false,
-  })
-);
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //middleware

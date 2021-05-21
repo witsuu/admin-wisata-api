@@ -9,6 +9,10 @@ const WisataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pathFile: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Destinations", WisataSchema);

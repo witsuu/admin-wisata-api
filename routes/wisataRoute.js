@@ -10,11 +10,12 @@ const {
   getAllWisata,
   getWisataWithPaging,
 } = require("../controllers/WisataController");
+const { uploadImgMiddleware } = require("../middlewares/uploadImg");
 
 Route.post("/destination/categories", storeCategory);
 Route.get("/destination/categories", getAllCategori);
 Route.get("/destination/categories/:id", getCategoryById);
-Route.post("/destination", storeWisata);
+Route.post("/destination", uploadImgMiddleware, storeWisata);
 Route.get("/destination/:id", getWisataById);
 Route.get("/destination", getAllWisata);
 Route.get("/destinations", getWisataWithPaging);
