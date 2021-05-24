@@ -1,4 +1,4 @@
-const Wisata = require("../models/WisataSchema");
+const { Wisata } = require("../models/WisataSchema");
 const Categories = require("../models/KategoriSchema");
 const { storeDestinations } = require("../validation/wisataValidation");
 
@@ -12,7 +12,7 @@ const storeWisata = async (req, res) => {
   const destination = new Wisata({
     name: req.body.name,
     description: req.body.description,
-    pathFile: req.file.path,
+    image_id: req.file.id,
   });
 
   try {
@@ -33,13 +33,19 @@ const storeWisata = async (req, res) => {
 };
 
 const getWisataById = async (req, res) => {
-  const wisata = await Wisata.findById(req.params.id);
+  const wisata = await Wisata.findById(req.params.id).populate({
+    path: "images",
+    populate: { path: "files_id" },
+  });
 
   res.send(wisata);
 };
 
 const getAllWisata = async (req, res) => {
-  const destinations = await Wisata.find();
+  const destinations = await Wisata.find().populate({
+    path: "images",
+    populate: { path: "files_id" },
+  });
 
   res.send(destinations);
 };

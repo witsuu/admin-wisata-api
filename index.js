@@ -31,6 +31,10 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// static folder
+const path = require("path");
+app.use("/static", express.static("static"));
+
 //middleware
 app.use("/api/user", userRoute);
 app.use("/api", Authenticated, wisataRoute);
