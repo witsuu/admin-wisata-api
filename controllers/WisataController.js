@@ -42,12 +42,25 @@ const getWisataById = async (req, res) => {
 };
 
 const getAllWisata = async (req, res) => {
-  const destinations = await Wisata.find().populate({
-    path: "images",
-    populate: { path: "files_id" },
-  });
+  const { page, limit } = req.query;
 
-  res.send(destinations);
+  const destinations = await Wisata.find()
+    .populate({
+      path: "images",
+      populate: { path: "files_id" },
+    })
+    .skip((page - 1) * limit)
+    .limit(parseInt(limit))
+    .exec();
+
+  const totalDestination = await Wisata.find().countDocuments();
+
+  res.send({
+    message: "data with pagination",
+    destinations: destinations,
+    currentPage: page,
+    maxPage: Math.ceil(totalDestination / limit),
+  });
 };
 
 const getWisataWithPaging = async (req, res, next) => {

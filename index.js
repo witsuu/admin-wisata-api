@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 8000;
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -8,6 +7,7 @@ const userRoute = require("./routes/userRoute");
 const wisataRoute = require("./routes/wisataRoute");
 const { Authenticated } = require("./middlewares/authenticated");
 dotenv.config();
+const PORT = process.env.PORT || 8000;
 
 global.__basedir = __dirname;
 
@@ -44,5 +44,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("server running");
+  console.log("server running on " + PORT);
 });
