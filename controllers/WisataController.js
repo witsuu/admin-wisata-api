@@ -49,6 +49,7 @@ const getAllWisata = async (req, res) => {
       path: "images",
       populate: { path: "files_id" },
     })
+    .sort({ date: "desc" })
     .skip((page - 1) * limit)
     .limit(parseInt(limit))
     .exec();
