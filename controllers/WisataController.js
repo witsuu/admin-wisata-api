@@ -106,7 +106,7 @@ const deleteWisata = async (req, res) => {
   const id = req.params.id;
 
   try {
-    await Wisata.findByIdAndDelete(id);
+    await Wisata.findByIdAndDelete(id).exec();
 
     return res.send("delete sucessfull");
   } catch (err) {
