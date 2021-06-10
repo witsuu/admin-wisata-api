@@ -102,15 +102,16 @@ const editWisataById = async (req, res) => {
   }
 };
 
-const deleteWisata = (req, res) => {
+const deleteWisata = async (req, res) => {
   const id = req.params.id;
-  Wisata.findByIdAndDelete({ _id: id }, (err, doc) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("deleted successfull");
-    }
-  });
+
+  try {
+    await Wisata.findByIdAndDelete(id);
+
+    return res.send("delete sucessfull");
+  } catch (err) {
+    return res.send(err);
+  }
 };
 
 module.exports = {
