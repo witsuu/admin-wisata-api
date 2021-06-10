@@ -85,9 +85,27 @@ const getWisataWithPaging = async (req, res, next) => {
   }
 };
 
+const editWisataById = async (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const description = req.body.description;
+
+  try {
+    await Wisata.findOneAndUpdate(id, {
+      description: description,
+      name: name,
+    });
+
+    return res.send("updated successfull");
+  } catch (err) {
+    return res.send(err);
+  }
+};
+
 module.exports = {
   storeWisata,
   getWisataById,
   getAllWisata,
   getWisataWithPaging,
+  editWisataById,
 };
