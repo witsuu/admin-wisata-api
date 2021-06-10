@@ -89,12 +89,16 @@ const editWisataById = async (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
   const description = req.body.description;
+  console.log(id);
 
   try {
-    await Wisata.findOneAndUpdate(id, {
-      description: description,
-      name: name,
-    });
+    await Wisata.findOneAndUpdate(
+      { _id: id },
+      {
+        description: description,
+        name: name,
+      }
+    );
 
     return res.send("updated successfull");
   } catch (err) {
