@@ -10,6 +10,7 @@ const {
   getAllWisata,
   getWisataWithPaging,
   editWisataById,
+  deleteWisata,
 } = require("../controllers/WisataController");
 const { uploadImgMiddleware } = require("../middlewares/uploadImg");
 
@@ -21,5 +22,6 @@ Route.get("/destination/:id", getWisataById);
 Route.get("/destination", getAllWisata);
 Route.get("/destinations", getWisataWithPaging);
 Route.put("/destination/:id", editWisataById);
+Route.delete("/destination/:id", deleteWisata);
 
 module.exports = Route;
